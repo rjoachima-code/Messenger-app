@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.Messenger" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorPrimaryDark">@color/blue_dark</item>
+        <item name="colorAccent">@color/blue_primary</item>
+        <item name="android:windowBackground">@color/background_primary</item>
+        <item name="android:statusBarColor">@color/background_primary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/background_primary</item>
+    </style>
+    
+    <!-- Toolbar Style -->
+    <style name="MessengerToolbar">
+        <item name="android:background">@color/background_primary</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+    
+    <!-- Message Bubble Styles -->
+    <style name="MessageBubble">
+        <item name="android:padding">12dp</item>
+        <item name="android:maxWidth">280dp</item>
+    </style>
+    
+    <style name="MessageBubble.Outgoing">
+        <item name="android:background">@drawable/bubble_outgoing</item>
+        <item name="android:textColor">@color/bubble_outgoing_text</item>
+    </style>
+    
+    <style name="MessageBubble.Incoming">
+        <item name="android:background">@drawable/bubble_incoming</item>
+        <item name="android:textColor">@color/bubble_incoming_text</item>
+    </style>
+    
+    <!-- Input Style -->
+    <style name="MessageInput">
+        <item name="android:background">@drawable/input_background</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:hint">@string/message_hint</item>
+        <item name="android:textColorHint">@color/input_hint</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    
+    <!-- Avatar Style -->
+    <style name="Avatar">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+    
+    <style name="Avatar.Large">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+    
+    <style name="Avatar.Small">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+    
+    <!-- Platform Badge Style -->
+    <style name="PlatformBadge">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:padding">2dp</item>
+    </style>
+    
+    <!-- Unread Badge Style -->
+    <style name="UnreadBadge">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/unread_badge</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:minWidth">18dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <!-- Online Indicator Style -->
+    <style name="OnlineIndicator">
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:background">@drawable/online_indicator</item>
+    </style>
+    
+    <!-- Reaction Style -->
+    <style name="ReactionEmoji">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+</resources>
