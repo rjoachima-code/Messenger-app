@@ -84,9 +84,18 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 
 ## Building
 
+### GitHub Actions (Recommended)
+The project includes a GitHub Actions workflow that automatically builds the APK on push and pull requests. The built APK artifact can be downloaded from the Actions tab.
+
+### Local Build
 ```bash
 ./gradlew assembleDebug
 ```
+
+**Requirements**:
+- JDK 17 or higher
+- Android SDK with API 34
+- Network access to Google Maven repository
 
 ## Dependencies
 
