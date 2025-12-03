@@ -27,7 +27,21 @@ object MessageRepository {
         Conversation("5", mockContacts[4], "Did you see my latest video?", System.currentTimeMillis() - 172800_000, 0, Platform.TIKTOK),
         Conversation("6", mockContacts[5], "Thanks for helping yesterday", System.currentTimeMillis() - 259200_000, 0, Platform.SMS),
         Conversation("7", mockContacts[6], "Movie night this weekend?", System.currentTimeMillis() - 345600_000, 3, Platform.FACEBOOK),
-        Conversation("8", mockContacts[7], "Cool! Let's connect later", System.currentTimeMillis() - 432000_000, 0, Platform.INSTAGRAM)
+        Conversation("8", mockContacts[7], "Cool! Let's connect later", System.currentTimeMillis() - 432000_000, 0, Platform.INSTAGRAM),
+        // Group chat example
+        Conversation(
+            id = "9",
+            contact = mockContacts[0], // Primary contact for display purposes
+            lastMessage = "Who's bringing the snacks?",
+            lastMessageTime = System.currentTimeMillis() - 1800_000,
+            unreadCount = 4,
+            platform = Platform.IMESSAGE,
+            isGroup = true,
+            groupName = "Weekend Plans 🎉",
+            participants = listOf(mockContacts[0], mockContacts[1], mockContacts[2], mockContacts[3]),
+            adminIds = listOf("me", mockContacts[0].id),
+            typingParticipants = listOf("Emma")
+        )
     )
     
     private val mockMessages = mutableMapOf<String, MutableList<Message>>()
@@ -189,5 +203,234 @@ object MessageRepository {
         if (convIndex >= 0) {
             mockConversations[convIndex] = mockConversations[convIndex].copy(unreadCount = 0)
         }
+    }
+    
+    /**
+     * Forward a message to another conversation
+     */
+    fun forwardMessage(messageId: String, fromConversationId: String, toConversationId: String): Message? {
+        val originalMessages = mockMessages[fromConversationId] ?: return null
+        val originalMessage = originalMessages.find { it.id == messageId } ?: return null
+        
+        val forwardedMessage = Message(
+            id = "${toConversationId}_${System.currentTimeMillis()}",
+            conversationId = toConversationId,
+            senderId = "me",
+            senderName = "Me",
+            content = originalMessage.content,
+            timestamp = System.currentTimeMillis(),
+            type = originalMessage.type,
+            isOutgoing = true,
+            status = MessageStatus.SENDING,
+            mediaUrl = originalMessage.mediaUrl,
+            isForwarded = true,
+            originalSenderId = originalMessage.senderId,
+            originalSenderName = originalMessage.senderName,
+            forwardedFrom = originalMessage.senderName
+        )
+        
+        mockMessages.getOrPut(toConversationId) { mutableListOf() }.add(forwardedMessage)
+        
+        // Update target conversation last message
+        val convIndex = mockConversations.indexOfFirst { it.id == toConversationId }
+        if (convIndex >= 0) {
+            mockConversations[convIndex] = mockConversations[convIndex].copy(
+                lastMessage = originalMessage.content,
+                lastMessageTime = System.currentTimeMillis()
+            )
+        }
+        
+        return forwardedMessage
+    }
+    
+    /**
+     * Edit an existing message
+     */
+    fun editMessage(messageId: String, conversationId: String, newContent: String): Message? {
+        val messages = mockMessages[conversationId] ?: return null
+        val messageIndex = messages.indexOfFirst { it.id == messageId }
+        if (messageIndex < 0) return null
+        
+        val message = messages[messageIndex]
+        if (!message.canEdit()) return null
+        
+        val editedMessage = message.copy(
+            content = newContent,
+            isEdited = true,
+            editedAt = System.currentTimeMillis(),
+            originalContent = message.originalContent ?: message.content
+        )
+        messages[messageIndex] = editedMessage
+        
+        // Update conversation last message if this was the last message
+        val convIndex = mockConversations.indexOfFirst { it.id == conversationId }
+        if (convIndex >= 0) {
+            val lastMessage = messages.lastOrNull()
+            if (lastMessage?.id == messageId) {
+                mockConversations[convIndex] = mockConversations[convIndex].copy(
+                    lastMessage = newContent
+                )
+            }
+        }
+        
+        return editedMessage
+    }
+    
+    /**
+     * Pin a message
+     */
+    fun pinMessage(messageId: String, conversationId: String): Message? {
+        val messages = mockMessages[conversationId] ?: return null
+        val messageIndex = messages.indexOfFirst { it.id == messageId }
+        if (messageIndex < 0) return null
+        
+        val message = messages[messageIndex]
+        val pinnedMessage = message.copy(
+            isPinned = true,
+            pinnedAt = System.currentTimeMillis(),
+            pinnedBy = "me"
+        )
+        messages[messageIndex] = pinnedMessage
+        return pinnedMessage
+    }
+    
+    /**
+     * Unpin a message
+     */
+    fun unpinMessage(messageId: String, conversationId: String): Message? {
+        val messages = mockMessages[conversationId] ?: return null
+        val messageIndex = messages.indexOfFirst { it.id == messageId }
+        if (messageIndex < 0) return null
+        
+        val message = messages[messageIndex]
+        val unpinnedMessage = message.copy(
+            isPinned = false,
+            pinnedAt = null,
+            pinnedBy = null
+        )
+        messages[messageIndex] = unpinnedMessage
+        return unpinnedMessage
+    }
+    
+    /**
+     * Get pinned messages for a conversation
+     */
+    fun getPinnedMessages(conversationId: String): List<Message> {
+        return mockMessages[conversationId]?.filter { it.isPinned } ?: emptyList()
+    }
+    
+    /**
+     * Search messages within a conversation
+     */
+    fun searchMessages(conversationId: String, query: String): List<Message> {
+        val lowerQuery = query.lowercase()
+        return mockMessages[conversationId]?.filter { 
+            it.content.lowercase().contains(lowerQuery)
+        } ?: emptyList()
+    }
+    
+    /**
+     * Get all contacts
+     */
+    fun getContacts(): List<Contact> = mockContacts
+    
+    /**
+     * Search contacts
+     */
+    fun searchContacts(query: String): List<Contact> {
+        val lowerQuery = query.lowercase()
+        return mockContacts.filter {
+            it.name.lowercase().contains(lowerQuery) ||
+            it.phoneNumber?.contains(lowerQuery) == true
+        }
+    }
+    
+    /**
+     * Get contact by ID
+     */
+    fun getContact(contactId: String): Contact? = mockContacts.find { it.id == contactId }
+    
+    /**
+     * Create a new conversation
+     */
+    fun createConversation(contact: Contact): Conversation {
+        // Check if conversation with this contact already exists
+        val existing = mockConversations.find { !it.isGroup && it.contact.id == contact.id }
+        if (existing != null) return existing
+        
+        val newConversation = Conversation(
+            id = "conv_${System.currentTimeMillis()}",
+            contact = contact,
+            lastMessage = "",
+            lastMessageTime = System.currentTimeMillis(),
+            platform = contact.platform
+        )
+        mockConversations.add(0, newConversation)
+        mockMessages[newConversation.id] = mutableListOf()
+        return newConversation
+    }
+    
+    /**
+     * Create a new group conversation
+     */
+    fun createGroupConversation(name: String, participants: List<Contact>): Conversation {
+        val newGroup = Conversation(
+            id = "group_${System.currentTimeMillis()}",
+            contact = participants.firstOrNull() ?: Contact("", "Group", platform = Platform.SMS),
+            lastMessage = "Group created",
+            lastMessageTime = System.currentTimeMillis(),
+            platform = Platform.IMESSAGE,
+            isGroup = true,
+            groupName = name,
+            participants = participants,
+            adminIds = listOf("me")
+        )
+        mockConversations.add(0, newGroup)
+        mockMessages[newGroup.id] = mutableListOf()
+        return newGroup
+    }
+    
+    /**
+     * Mute a conversation
+     */
+    fun muteConversation(conversationId: String, muted: Boolean) {
+        val convIndex = mockConversations.indexOfFirst { it.id == conversationId }
+        if (convIndex >= 0) {
+            mockConversations[convIndex] = mockConversations[convIndex].copy(isMuted = muted)
+        }
+    }
+    
+    /**
+     * Archive a conversation
+     */
+    fun archiveConversation(conversationId: String, archived: Boolean) {
+        val convIndex = mockConversations.indexOfFirst { it.id == conversationId }
+        if (convIndex >= 0) {
+            mockConversations[convIndex] = mockConversations[convIndex].copy(isArchived = archived)
+        }
+    }
+    
+    /**
+     * Pin a conversation
+     */
+    fun pinConversation(conversationId: String, pinned: Boolean) {
+        val convIndex = mockConversations.indexOfFirst { it.id == conversationId }
+        if (convIndex >= 0) {
+            mockConversations[convIndex] = mockConversations[convIndex].copy(isPinned = pinned)
+        }
+    }
+    
+    /**
+     * Get archived conversations
+     */
+    fun getArchivedConversations(): List<Conversation> {
+        return mockConversations.filter { it.isArchived }.sortedByDescending { it.lastMessageTime }
+    }
+    
+    /**
+     * Get group conversations
+     */
+    fun getGroupConversations(): List<Conversation> {
+        return mockConversations.filter { it.isGroup }.sortedByDescending { it.lastMessageTime }
     }
 }

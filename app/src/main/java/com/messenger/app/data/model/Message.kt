@@ -18,7 +18,23 @@ data class Message(
     val reactions: List<Reaction> = emptyList(),
     val replyToMessageId: String? = null,
     val replyToContent: String? = null,
-    val isSelected: Boolean = false
+    val isSelected: Boolean = false,
+    // Forwarding properties
+    val isForwarded: Boolean = false,
+    val originalSenderId: String? = null,
+    val originalSenderName: String? = null,
+    val forwardedFrom: String? = null,
+    // Editing properties
+    val isEdited: Boolean = false,
+    val editedAt: Long? = null,
+    val originalContent: String? = null,
+    // Scheduled message
+    val isScheduled: Boolean = false,
+    val scheduledTime: Long? = null,
+    // Pinned message
+    val isPinned: Boolean = false,
+    val pinnedAt: Long? = null,
+    val pinnedBy: String? = null
 ) {
     /**
      * Get the reaction count for display
@@ -44,5 +60,41 @@ data class Message(
      */
     fun getUserReaction(userId: String): Reaction? {
         return reactions.find { it.userId == userId }
+    }
+    
+    /**
+     * Get formatted timestamp for display
+     */
+    fun getFormattedTime(): String {
+        val sdf = java.text.SimpleDateFormat("h:mm a", java.util.Locale.getDefault())
+        return sdf.format(java.util.Date(timestamp))
+    }
+    
+    /**
+     * Get forwarded from text
+     */
+    fun getForwardedText(): String? {
+        return if (isForwarded) {
+            "Forwarded from ${originalSenderName ?: forwardedFrom ?: "Unknown"}"
+        } else null
+    }
+    
+    /**
+     * Check if message can be edited (within 15 minutes)
+     */
+    fun canEdit(): Boolean {
+        if (!isOutgoing || type != MessageType.TEXT) return false
+        val fifteenMinutes = 15 * 60 * 1000L
+        return System.currentTimeMillis() - timestamp < fifteenMinutes
+    }
+    
+    /**
+     * Get scheduled time text
+     */
+    fun getScheduledTimeText(): String? {
+        return if (isScheduled && scheduledTime != null) {
+            val sdf = java.text.SimpleDateFormat("MMM d, h:mm a", java.util.Locale.getDefault())
+            "Scheduled for ${sdf.format(java.util.Date(scheduledTime))}"
+        } else null
     }
 }

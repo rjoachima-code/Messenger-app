@@ -18,8 +18,11 @@ import com.messenger.app.R
 import com.messenger.app.data.model.Conversation
 import com.messenger.app.data.model.Platform
 import com.messenger.app.data.repository.MessageRepository
+import com.messenger.app.data.repository.SettingsRepository
 import com.messenger.app.ui.chat.ChatActivity
+import com.messenger.app.ui.compose.NewMessageActivity
 import com.messenger.app.ui.conversations.ConversationAdapter
+import com.messenger.app.ui.settings.SettingsActivity
 
 /**
  * Main activity displaying the list of conversations
@@ -32,12 +35,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emptyState: LinearLayout
     private lateinit var fabNewMessage: FloatingActionButton
     private lateinit var composeButton: ImageButton
+    private lateinit var settingsButton: ImageButton
 
     private lateinit var adapter: ConversationAdapter
     private var currentPlatformFilter: Platform? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Initialize settings
+        SettingsRepository.init(this)
+        
         setContentView(R.layout.activity_main)
 
         initViews()
@@ -55,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         emptyState = findViewById(R.id.emptyState)
         fabNewMessage = findViewById(R.id.fabNewMessage)
         composeButton = findViewById(R.id.composeButton)
+        settingsButton = findViewById(R.id.settingsButton)
     }
 
     private fun setupRecyclerView() {
@@ -90,10 +99,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupButtons() {
         fabNewMessage.setOnClickListener {
-            // TODO: Open new message composer
+            openNewMessage()
         }
         composeButton.setOnClickListener {
-            // TODO: Open new message composer
+            openNewMessage()
+        }
+        settingsButton.setOnClickListener {
+            openSettings()
         }
     }
 
@@ -135,9 +147,20 @@ class MainActivity : AppCompatActivity() {
     private fun openChat(conversation: Conversation) {
         val intent = Intent(this, ChatActivity::class.java).apply {
             putExtra(ChatActivity.EXTRA_CONVERSATION_ID, conversation.id)
-            putExtra(ChatActivity.EXTRA_CONTACT_NAME, conversation.contact.name)
+            putExtra(ChatActivity.EXTRA_CONTACT_NAME, conversation.getDisplayName())
             putExtra(ChatActivity.EXTRA_IS_ONLINE, conversation.contact.isOnline)
+            putExtra(ChatActivity.EXTRA_IS_GROUP, conversation.isGroup)
         }
+        startActivity(intent)
+    }
+    
+    private fun openNewMessage() {
+        val intent = Intent(this, NewMessageActivity::class.java)
+        startActivity(intent)
+    }
+    
+    private fun openSettings() {
+        val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
 

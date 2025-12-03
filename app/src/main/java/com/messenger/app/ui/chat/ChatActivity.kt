@@ -27,6 +27,7 @@ class ChatActivity : AppCompatActivity() {
         const val EXTRA_CONVERSATION_ID = "conversation_id"
         const val EXTRA_CONTACT_NAME = "contact_name"
         const val EXTRA_IS_ONLINE = "is_online"
+        const val EXTRA_IS_GROUP = "is_group"
     }
 
     private lateinit var messagesRecyclerView: RecyclerView
@@ -264,6 +265,27 @@ class ChatActivity : AppCompatActivity() {
             popupWindow.dismiss()
         }
 
+        popupView.findViewById<View>(R.id.actionForward).setOnClickListener {
+            popupWindow.dismiss()
+            showForwardDialog(message)
+        }
+
+        // Update pin button text based on message state
+        val pinText = popupView.findViewById<android.widget.TextView>(R.id.pinText)
+        pinText.text = if (message.isPinned) getString(R.string.action_unpin) else getString(R.string.action_pin)
+        
+        popupView.findViewById<View>(R.id.actionPin).setOnClickListener {
+            if (message.isPinned) {
+                MessageRepository.unpinMessage(message.id, conversationId)
+                Toast.makeText(this, getString(R.string.message_unpinned), Toast.LENGTH_SHORT).show()
+            } else {
+                MessageRepository.pinMessage(message.id, conversationId)
+                Toast.makeText(this, getString(R.string.message_pinned), Toast.LENGTH_SHORT).show()
+            }
+            loadMessages()
+            popupWindow.dismiss()
+        }
+
         popupView.findViewById<View>(R.id.actionDelete).setOnClickListener {
             MessageRepository.deleteMessage(message.id, conversationId)
             loadMessages()
@@ -272,6 +294,28 @@ class ChatActivity : AppCompatActivity() {
 
         popupWindow.elevation = 8f
         popupWindow.showAsDropDown(anchorView, 0, -anchorView.height, Gravity.CENTER)
+    }
+    
+    private fun showForwardDialog(message: Message) {
+        // Show list of conversations to forward to
+        val conversations = MessageRepository.getConversations().filter { it.id != conversationId }
+        
+        if (conversations.isEmpty()) {
+            Toast.makeText(this, "No other conversations to forward to", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        val names = conversations.map { it.getDisplayName() }.toTypedArray()
+        
+        android.app.AlertDialog.Builder(this)
+            .setTitle(getString(R.string.forward_to))
+            .setItems(names) { _, which ->
+                val targetConversation = conversations[which]
+                MessageRepository.forwardMessage(message.id, conversationId, targetConversation.id)
+                Toast.makeText(this, "Message forwarded to ${targetConversation.getDisplayName()}", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
     }
 
     private fun showReactionPicker(message: Message, anchorView: View) {

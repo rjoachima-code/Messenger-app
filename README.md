@@ -9,6 +9,7 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 - Blue bubbles for sent messages, gray for received
 - Smooth gradients and modern styling
 - Platform badges on conversation avatars
+- **Dark Mode support** with system theme integration
 
 ### 🔗 Multi-Platform Integration
 - SMS (default messages)
@@ -26,6 +27,14 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 - Message input with camera, image, and voice options
 - Timestamp display
 - Send button that activates when text is entered
+- **New Message Composer** with contact picker
+
+### 👥 Group Chats
+- Create group conversations
+- Add multiple participants
+- Group naming
+- Admin management
+- Group typing indicators ("Sarah and Mike are typing...")
 
 ### ✓ Message Status Indicators
 - ✓ Sent (single check)
@@ -37,6 +46,7 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 - Animated "typing..." display
 - Shows in chat header and conversation list
 - Real-time typing detection
+- Multi-user typing in groups
 
 ### 🎙️ Voice Messages
 - Hold mic button to record
@@ -54,8 +64,24 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
   - React
   - Copy
   - Reply
+  - **Forward** to other conversations
+  - **Pin/Unpin** messages
   - Delete
 - Selection mode for bulk operations
+
+### 📌 Pinned Messages
+- Pin important messages for quick access
+- Unpin when no longer needed
+
+### ↪️ Message Forwarding
+- Forward messages to other conversations
+- Forwarded message indicator
+- Original sender attribution
+
+### ✏️ Message Editing
+- Edit sent messages within 15 minutes
+- "Edited" indicator on modified messages
+- Original content preserved
 
 ### 📞 Communication Options
 - Voice call button
@@ -67,12 +93,27 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 - Camera integration
 - Photo gallery access
 
+### 🔔 Notifications
+- Push notification support structure
+- Customizable notification sounds
+- Vibration settings
+- Message preview options
+
+### ⚙️ Settings
+- **Appearance**: Dark mode, font size
+- **Notifications**: Enable/disable, sound, vibration, message preview
+- **Privacy**: Read receipts, typing indicators, last seen visibility
+- **Chat**: Enter to send option
+- **Account**: Linked accounts management
+- **Storage**: Cache and media management
+
 ### 🎨 UI Elements
 - Rounded message bubbles with tail effect
 - Platform-specific color coding
 - Online status dots
 - Unread message counters
 - Smooth transitions between views
+- Mute/Archive conversation support
 
 ## Technical Details
 
@@ -118,6 +159,7 @@ The project includes a GitHub Actions workflow that automatically builds the APK
 - READ_MEDIA_IMAGES / READ_MEDIA_VIDEO - For media access
 - RECORD_AUDIO - For voice messages
 - CALL_PHONE - For voice calls
+- POST_NOTIFICATIONS - For push notifications
 
 ## Future Enhancements
 
@@ -126,7 +168,8 @@ To integrate real APIs, you'll need to:
 2. Implement WebSocket connections for real-time messaging
 3. Add proper data persistence with SQLite or Room
 4. Handle media uploads and downloads
-5. Implement notification services
+5. Implement notification services with Firebase Cloud Messaging
+6. Add end-to-end encryption for secure messaging
 
 ## License
 

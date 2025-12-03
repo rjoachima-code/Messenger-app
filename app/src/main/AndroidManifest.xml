@@ -69,6 +69,21 @@
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/Theme.Messenger"
             android:windowSoftInputMode="adjustResize" />
+            
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/Theme.Messenger" />
+            
+        <activity
+            android:name=".ui.compose.NewMessageActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/Theme.Messenger" />
+            
+        <activity
+            android:name=".ui.compose.CreateGroupActivity"
+            android:parentActivityName=".ui.compose.NewMessageActivity"
+            android:theme="@style/Theme.Messenger" />
 
         <!-- SMS Receiver -->
         <receiver

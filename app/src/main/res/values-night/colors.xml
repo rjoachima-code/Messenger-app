@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors - iMessage inspired (Dark Mode) -->
+    <color name="blue_primary">#0A84FF</color>
+    <color name="blue_dark">#007AFF</color>
+    <color name="blue_light">#5AC8FA</color>
+    
+    <!-- Message Bubbles (Dark Mode) -->
+    <color name="bubble_outgoing">#0A84FF</color>
+    <color name="bubble_incoming">#2C2C2E</color>
+    <color name="bubble_outgoing_text">#FFFFFF</color>
+    <color name="bubble_incoming_text">#FFFFFF</color>
+    
+    <!-- Platform Colors (same in dark mode) -->
+    <color name="platform_sms">#30D158</color>
+    <color name="platform_facebook">#1877F2</color>
+    <color name="platform_instagram">#E4405F</color>
+    <color name="platform_tiktok">#FFFFFF</color>
+    <color name="platform_imessage">#0A84FF</color>
+    
+    <!-- Status Colors (Dark Mode) -->
+    <color name="online_status">#30D158</color>
+    <color name="offline_status">#8E8E93</color>
+    <color name="typing_indicator">#0A84FF</color>
+    <color name="unread_badge">#FF453A</color>
+    
+    <!-- Message Status (Dark Mode) -->
+    <color name="status_sent">#8E8E93</color>
+    <color name="status_delivered">#8E8E93</color>
+    <color name="status_read">#0A84FF</color>
+    
+    <!-- Background Colors (Dark Mode) -->
+    <color name="background_primary">#000000</color>
+    <color name="background_secondary">#1C1C1E</color>
+    <color name="background_chat">#000000</color>
+    
+    <!-- Text Colors (Dark Mode) -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8E8E93</color>
+    <color name="text_link">#0A84FF</color>
+    
+    <!-- Input Bar (Dark Mode) -->
+    <color name="input_background">#1C1C1E</color>
+    <color name="input_hint">#8E8E93</color>
+    
+    <!-- Divider (Dark Mode) -->
+    <color name="divider">#38383A</color>
+    
+    <!-- Reaction Colors (Dark Mode) -->
+    <color name="reaction_background">#2C2C2E</color>
+    <color name="reaction_selected">#0A84FF</color>
+    
+    <!-- Voice Recording (Dark Mode) -->
+    <color name="recording_red">#FF453A</color>
+    <color name="waveform">#0A84FF</color>
+</resources>
