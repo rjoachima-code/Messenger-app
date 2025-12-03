@@ -145,7 +145,6 @@ class CreateGroupActivity : AppCompatActivity() {
     }
 
     private fun updateNextButton() {
-        val hasName = groupNameEditText.text.isNotEmpty()
         val hasContacts = selectedContacts.size >= 2
         nextButton.isEnabled = hasContacts
         nextButton.alpha = if (hasContacts) 1.0f else 0.5f

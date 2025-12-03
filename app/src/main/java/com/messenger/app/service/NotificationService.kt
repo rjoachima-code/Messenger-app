@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.messenger.app.R
-import com.messenger.app.data.model.Message
 import com.messenger.app.data.repository.SettingsRepository
 import com.messenger.app.ui.chat.ChatActivity
 
