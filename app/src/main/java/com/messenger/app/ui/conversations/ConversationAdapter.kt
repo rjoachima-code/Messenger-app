@@ -39,25 +39,27 @@ class ConversationAdapter(
         private val typingIndicator: TextView = itemView.findViewById(R.id.typingIndicator)
 
         fun bind(conversation: Conversation) {
-            // Set avatar initials
-            avatarInitials.text = getInitials(conversation.contact.name)
+            // Set avatar initials (use group initials for groups)
+            avatarInitials.text = conversation.getAvatarInitials()
             
             // Set platform badge background
             platformBadge.setBackgroundResource(getPlatformBadgeDrawable(conversation.platform))
             
-            // Show/hide online indicator
-            onlineIndicator.visibility = if (conversation.contact.isOnline) View.VISIBLE else View.GONE
+            // Show/hide online indicator (hide for groups)
+            onlineIndicator.visibility = if (!conversation.isGroup && conversation.contact.isOnline) View.VISIBLE else View.GONE
             
-            // Set contact name
-            contactName.text = conversation.contact.name
+            // Set contact/group name
+            contactName.text = conversation.getDisplayName()
             
             // Set time
             timeText.text = conversation.getFormattedTime()
             
             // Set last message or typing indicator
-            if (conversation.isTyping) {
+            val typingText = conversation.getTypingText()
+            if (typingText.isNotEmpty()) {
                 lastMessage.visibility = View.GONE
                 typingIndicator.visibility = View.VISIBLE
+                typingIndicator.text = typingText
             } else {
                 lastMessage.visibility = View.VISIBLE
                 lastMessage.text = conversation.lastMessage
@@ -76,22 +78,10 @@ class ConversationAdapter(
             itemView.setOnClickListener { onConversationClick(conversation) }
         }
         
-        private fun getInitials(name: String): String {
-            val parts = name.split(" ")
-            return when {
-                parts.size >= 2 -> "${parts[0].first()}${parts[1].first()}"
-                parts.isNotEmpty() -> parts[0].take(2)
-                else -> "?"
-            }.uppercase()
-        }
-        
         private fun getPlatformBadgeDrawable(platform: Platform): Int {
             return when (platform) {
                 Platform.SMS -> R.drawable.platform_badge_sms
-                Platform.FACEBOOK -> R.drawable.platform_badge_facebook
-                Platform.INSTAGRAM -> R.drawable.platform_badge_instagram
-                Platform.TIKTOK -> R.drawable.platform_badge_tiktok
-                Platform.IMESSAGE -> R.drawable.platform_badge_imessage
+                Platform.MMS -> R.drawable.platform_badge_mms
             }
         }
     }

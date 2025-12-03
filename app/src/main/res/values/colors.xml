@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors - iMessage inspired -->
+    <!-- Primary Colors -->
     <color name="blue_primary">#007AFF</color>
     <color name="blue_dark">#0056CC</color>
     <color name="blue_light">#34AAFF</color>
@@ -13,10 +13,7 @@
     
     <!-- Platform Colors -->
     <color name="platform_sms">#34C759</color>
-    <color name="platform_facebook">#1877F2</color>
-    <color name="platform_instagram">#E4405F</color>
-    <color name="platform_tiktok">#000000</color>
-    <color name="platform_imessage">#007AFF</color>
+    <color name="platform_mms">#007AFF</color>
     
     <!-- Status Colors -->
     <color name="online_status">#34C759</color>

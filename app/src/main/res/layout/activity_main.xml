@@ -37,6 +37,15 @@
                     android:textStyle="bold" />
 
                 <ImageButton
+                    android:id="@+id/settingsButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/settings"
+                    android:src="@drawable/ic_settings"
+                    app:tint="@color/blue_primary" />
+
+                <ImageButton
                     android:id="@+id/composeButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -82,58 +91,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-
-        <!-- Platform Filter Chips -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/platformChipGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/spacing_lg"
-                android:paddingEnd="@dimen/spacing_lg"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipAll"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/platform_all" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipSms"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/platform_sms" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipFacebook"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/platform_facebook" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipInstagram"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/platform_instagram" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipTiktok"
-                    style="@style/Widget.Material3.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/platform_tiktok" />
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
 
         <!-- Conversation List -->
         <androidx.recyclerview.widget.RecyclerView
