@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors - iMessage inspired -->
+    <color name="blue_primary">#007AFF</color>
+    <color name="blue_dark">#0056CC</color>
+    <color name="blue_light">#34AAFF</color>
+    
+    <!-- Message Bubbles -->
+    <color name="bubble_outgoing">#007AFF</color>
+    <color name="bubble_incoming">#E9E9EB</color>
+    <color name="bubble_outgoing_text">#FFFFFF</color>
+    <color name="bubble_incoming_text">#000000</color>
+    
+    <!-- Platform Colors -->
+    <color name="platform_sms">#34C759</color>
+    <color name="platform_facebook">#1877F2</color>
+    <color name="platform_instagram">#E4405F</color>
+    <color name="platform_tiktok">#000000</color>
+    <color name="platform_imessage">#007AFF</color>
+    
+    <!-- Status Colors -->
+    <color name="online_status">#34C759</color>
+    <color name="offline_status">#8E8E93</color>
+    <color name="typing_indicator">#007AFF</color>
+    <color name="unread_badge">#FF3B30</color>
+    
+    <!-- Message Status -->
+    <color name="status_sent">#8E8E93</color>
+    <color name="status_delivered">#8E8E93</color>
+    <color name="status_read">#007AFF</color>
+    
+    <!-- Background Colors -->
+    <color name="background_primary">#FFFFFF</color>
+    <color name="background_secondary">#F2F2F7</color>
+    <color name="background_chat">#FFFFFF</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#8E8E93</color>
+    <color name="text_link">#007AFF</color>
+    
+    <!-- Input Bar -->
+    <color name="input_background">#F2F2F7</color>
+    <color name="input_hint">#8E8E93</color>
+    
+    <!-- Divider -->
+    <color name="divider">#E5E5EA</color>
+    
+    <!-- Reaction Colors -->
+    <color name="reaction_background">#F2F2F7</color>
+    <color name="reaction_selected">#007AFF</color>
+    
+    <!-- Voice Recording -->
+    <color name="recording_red">#FF3B30</color>
+    <color name="waveform">#007AFF</color>
+</resources>

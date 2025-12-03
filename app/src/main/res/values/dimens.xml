@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">24dp</dimen>
+    <dimen name="spacing_xxl">32dp</dimen>
+    
+    <!-- Avatar sizes -->
+    <dimen name="avatar_small">40dp</dimen>
+    <dimen name="avatar_medium">48dp</dimen>
+    <dimen name="avatar_large">56dp</dimen>
+    
+    <!-- Message bubble -->
+    <dimen name="bubble_padding">12dp</dimen>
+    <dimen name="bubble_corner_radius">18dp</dimen>
+    <dimen name="bubble_max_width">280dp</dimen>
+    
+    <!-- Input bar -->
+    <dimen name="input_height">48dp</dimen>
+    <dimen name="input_corner_radius">24dp</dimen>
+    
+    <!-- Badges -->
+    <dimen name="badge_size">18dp</dimen>
+    <dimen name="platform_badge_size">16dp</dimen>
+    <dimen name="online_indicator_size">12dp</dimen>
+    
+    <!-- Icon sizes -->
+    <dimen name="icon_small">20dp</dimen>
+    <dimen name="icon_medium">24dp</dimen>
+    <dimen name="icon_large">32dp</dimen>
+    
+    <!-- Text sizes -->
+    <dimen name="text_title">18sp</dimen>
+    <dimen name="text_body">16sp</dimen>
+    <dimen name="text_caption">14sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    
+    <!-- Toolbar -->
+    <dimen name="toolbar_height">56dp</dimen>
+</resources>
