@@ -11,12 +11,9 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.messenger.app.R
 import com.messenger.app.data.model.Conversation
-import com.messenger.app.data.model.Platform
 import com.messenger.app.data.repository.MessageRepository
 import com.messenger.app.data.repository.SettingsRepository
 import com.messenger.app.ui.chat.ChatActivity
@@ -31,14 +28,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var conversationsRecyclerView: RecyclerView
     private lateinit var searchEditText: EditText
-    private lateinit var platformChipGroup: ChipGroup
     private lateinit var emptyState: LinearLayout
     private lateinit var fabNewMessage: FloatingActionButton
     private lateinit var composeButton: ImageButton
     private lateinit var settingsButton: ImageButton
 
     private lateinit var adapter: ConversationAdapter
-    private var currentPlatformFilter: Platform? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         initViews()
         setupRecyclerView()
         setupSearch()
-        setupPlatformFilter()
         setupButtons()
         loadConversations()
     }
@@ -59,7 +53,6 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         conversationsRecyclerView = findViewById(R.id.conversationsRecyclerView)
         searchEditText = findViewById(R.id.searchEditText)
-        platformChipGroup = findViewById(R.id.platformChipGroup)
         emptyState = findViewById(R.id.emptyState)
         fabNewMessage = findViewById(R.id.fabNewMessage)
         composeButton = findViewById(R.id.composeButton)
@@ -84,19 +77,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupPlatformFilter() {
-        platformChipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
-            currentPlatformFilter = when {
-                checkedIds.contains(R.id.chipSms) -> Platform.SMS
-                checkedIds.contains(R.id.chipFacebook) -> Platform.FACEBOOK
-                checkedIds.contains(R.id.chipInstagram) -> Platform.INSTAGRAM
-                checkedIds.contains(R.id.chipTiktok) -> Platform.TIKTOK
-                else -> null // "All" or no selection
-            }
-            filterConversations(searchEditText.text?.toString() ?: "")
-        }
-    }
-
     private fun setupButtons() {
         fabNewMessage.setOnClickListener {
             openNewMessage()
@@ -116,19 +96,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun filterConversations(query: String) {
         val conversations = if (query.isEmpty()) {
-            if (currentPlatformFilter != null) {
-                MessageRepository.getConversationsByPlatform(currentPlatformFilter!!)
-            } else {
-                MessageRepository.getConversations()
-            }
+            MessageRepository.getConversations()
         } else {
-            MessageRepository.searchConversations(query).let { results ->
-                if (currentPlatformFilter != null) {
-                    results.filter { it.platform == currentPlatformFilter }
-                } else {
-                    results
-                }
-            }
+            MessageRepository.searchConversations(query)
         }
         updateConversationsList(conversations)
     }

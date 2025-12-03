@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors - iMessage inspired (Dark Mode) -->
+    <!-- Primary Colors (Dark Mode) -->
     <color name="blue_primary">#0A84FF</color>
     <color name="blue_dark">#007AFF</color>
     <color name="blue_light">#5AC8FA</color>
@@ -11,12 +11,9 @@
     <color name="bubble_outgoing_text">#FFFFFF</color>
     <color name="bubble_incoming_text">#FFFFFF</color>
     
-    <!-- Platform Colors (same in dark mode) -->
+    <!-- Platform Colors (Dark Mode) -->
     <color name="platform_sms">#30D158</color>
-    <color name="platform_facebook">#1877F2</color>
-    <color name="platform_instagram">#E4405F</color>
-    <color name="platform_tiktok">#FFFFFF</color>
-    <color name="platform_imessage">#0A84FF</color>
+    <color name="platform_mms">#0A84FF</color>
     
     <!-- Status Colors (Dark Mode) -->
     <color name="online_status">#30D158</color>

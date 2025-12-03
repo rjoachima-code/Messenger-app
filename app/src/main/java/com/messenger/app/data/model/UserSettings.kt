@@ -36,8 +36,7 @@ data class UserSettings(
     val clearCacheAutomatically: Boolean = false,
     
     // Account
-    val twoFactorEnabled: Boolean = false,
-    val linkedAccounts: List<LinkedAccount> = emptyList()
+    val twoFactorEnabled: Boolean = false
 )
 
 /**
@@ -87,13 +86,3 @@ enum class MediaRetention(val displayName: String, val days: Int) {
     ONE_YEAR("1 year", 365),
     FOREVER("Forever", -1)
 }
-
-/**
- * Linked social account
- */
-data class LinkedAccount(
-    val platform: Platform,
-    val username: String,
-    val isConnected: Boolean = true,
-    val connectedAt: Long = System.currentTimeMillis()
-)

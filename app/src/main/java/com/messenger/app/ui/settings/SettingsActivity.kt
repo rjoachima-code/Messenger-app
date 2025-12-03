@@ -27,7 +27,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var lastSeenSwitch: SwitchMaterial
     private lateinit var enterToSendSwitch: SwitchMaterial
     private lateinit var fontSizeSpinner: Spinner
-    private lateinit var linkedAccountsSection: LinearLayout
     private lateinit var storageSection: LinearLayout
     private lateinit var aboutSection: LinearLayout
 
@@ -55,7 +54,6 @@ class SettingsActivity : AppCompatActivity() {
         lastSeenSwitch = findViewById(R.id.lastSeenSwitch)
         enterToSendSwitch = findViewById(R.id.enterToSendSwitch)
         fontSizeSpinner = findViewById(R.id.fontSizeSpinner)
-        linkedAccountsSection = findViewById(R.id.linkedAccountsSection)
         storageSection = findViewById(R.id.storageSection)
         aboutSection = findViewById(R.id.aboutSection)
 
@@ -138,11 +136,6 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-        linkedAccountsSection.setOnClickListener {
-            Toast.makeText(this, "Manage linked accounts", Toast.LENGTH_SHORT).show()
-            // TODO: Open linked accounts screen
         }
 
         storageSection.setOnClickListener {

@@ -85,10 +85,7 @@ class SelectableContactAdapter(
         private fun getPlatformBadgeDrawable(platform: Platform): Int {
             return when (platform) {
                 Platform.SMS -> R.drawable.platform_badge_sms
-                Platform.FACEBOOK -> R.drawable.platform_badge_facebook
-                Platform.INSTAGRAM -> R.drawable.platform_badge_instagram
-                Platform.TIKTOK -> R.drawable.platform_badge_tiktok
-                Platform.IMESSAGE -> R.drawable.platform_badge_imessage
+                Platform.MMS -> R.drawable.platform_badge_mms
             }
         }
     }

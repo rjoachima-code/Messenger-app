@@ -9,25 +9,25 @@ import com.messenger.app.data.model.*
 object MessageRepository {
     
     private val mockContacts = listOf(
-        Contact("1", "Sarah Johnson", "+1234567890", avatarUrl = null, isOnline = true, platform = Platform.IMESSAGE),
+        Contact("1", "Sarah Johnson", "+1234567890", avatarUrl = null, isOnline = true, platform = Platform.SMS),
         Contact("2", "Mike Chen", "+1234567891", avatarUrl = null, isOnline = false, platform = Platform.SMS),
-        Contact("3", "Emma Wilson", "+1234567892", avatarUrl = null, isOnline = true, platform = Platform.FACEBOOK),
-        Contact("4", "James Brown", "+1234567893", avatarUrl = null, isOnline = false, platform = Platform.INSTAGRAM),
-        Contact("5", "Olivia Davis", "+1234567894", avatarUrl = null, isOnline = true, platform = Platform.TIKTOK),
+        Contact("3", "Emma Wilson", "+1234567892", avatarUrl = null, isOnline = true, platform = Platform.SMS),
+        Contact("4", "James Brown", "+1234567893", avatarUrl = null, isOnline = false, platform = Platform.SMS),
+        Contact("5", "Olivia Davis", "+1234567894", avatarUrl = null, isOnline = true, platform = Platform.SMS),
         Contact("6", "William Taylor", "+1234567895", avatarUrl = null, isOnline = false, platform = Platform.SMS),
-        Contact("7", "Sophia Martinez", "+1234567896", avatarUrl = null, isOnline = true, platform = Platform.FACEBOOK),
-        Contact("8", "Alexander Lee", "+1234567897", avatarUrl = null, isOnline = false, platform = Platform.INSTAGRAM)
+        Contact("7", "Sophia Martinez", "+1234567896", avatarUrl = null, isOnline = true, platform = Platform.SMS),
+        Contact("8", "Alexander Lee", "+1234567897", avatarUrl = null, isOnline = false, platform = Platform.SMS)
     )
     
     private val mockConversations = mutableListOf(
-        Conversation("1", mockContacts[0], "Hey! How are you doing?", System.currentTimeMillis() - 60_000, 2, Platform.IMESSAGE, isTyping = true),
+        Conversation("1", mockContacts[0], "Hey! How are you doing?", System.currentTimeMillis() - 60_000, 2, Platform.SMS, isTyping = true),
         Conversation("2", mockContacts[1], "The meeting is at 3 PM", System.currentTimeMillis() - 3600_000, 0, Platform.SMS),
-        Conversation("3", mockContacts[2], "Check out this photo! 📸", System.currentTimeMillis() - 7200_000, 5, Platform.FACEBOOK),
-        Conversation("4", mockContacts[3], "Just posted a new story!", System.currentTimeMillis() - 86400_000, 1, Platform.INSTAGRAM),
-        Conversation("5", mockContacts[4], "Did you see my latest video?", System.currentTimeMillis() - 172800_000, 0, Platform.TIKTOK),
+        Conversation("3", mockContacts[2], "Check out this photo! 📸", System.currentTimeMillis() - 7200_000, 5, Platform.MMS),
+        Conversation("4", mockContacts[3], "Just sent the document!", System.currentTimeMillis() - 86400_000, 1, Platform.SMS),
+        Conversation("5", mockContacts[4], "See you at the party!", System.currentTimeMillis() - 172800_000, 0, Platform.SMS),
         Conversation("6", mockContacts[5], "Thanks for helping yesterday", System.currentTimeMillis() - 259200_000, 0, Platform.SMS),
-        Conversation("7", mockContacts[6], "Movie night this weekend?", System.currentTimeMillis() - 345600_000, 3, Platform.FACEBOOK),
-        Conversation("8", mockContacts[7], "Cool! Let's connect later", System.currentTimeMillis() - 432000_000, 0, Platform.INSTAGRAM),
+        Conversation("7", mockContacts[6], "Movie night this weekend?", System.currentTimeMillis() - 345600_000, 3, Platform.SMS),
+        Conversation("8", mockContacts[7], "Cool! Let's connect later", System.currentTimeMillis() - 432000_000, 0, Platform.SMS),
         // Group chat example
         Conversation(
             id = "9",
@@ -35,7 +35,7 @@ object MessageRepository {
             lastMessage = "Who's bringing the snacks?",
             lastMessageTime = System.currentTimeMillis() - 1800_000,
             unreadCount = 4,
-            platform = Platform.IMESSAGE,
+            platform = Platform.MMS,
             isGroup = true,
             groupName = "Weekend Plans 🎉",
             participants = listOf(mockContacts[0], mockContacts[1], mockContacts[2], mockContacts[3]),
@@ -379,7 +379,7 @@ object MessageRepository {
             contact = participants.firstOrNull() ?: Contact("", "Group", platform = Platform.SMS),
             lastMessage = "Group created",
             lastMessageTime = System.currentTimeMillis(),
-            platform = Platform.IMESSAGE,
+            platform = Platform.MMS,
             isGroup = true,
             groupName = name,
             participants = participants,

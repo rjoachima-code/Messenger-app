@@ -1,23 +1,14 @@
 # Messenger App
 
-A comprehensive iMessage-style messaging app for Android that unifies multiple messaging platforms.
+A modern SMS/MMS messaging app replacement for Android with a clean, intuitive design.
 
 ## Features
 
-### 📱 iMessage-Inspired Design
+### 📱 Modern Design
 - Clean, minimalist interface with rounded message bubbles
 - Blue bubbles for sent messages, gray for received
 - Smooth gradients and modern styling
-- Platform badges on conversation avatars
 - **Dark Mode support** with system theme integration
-
-### 🔗 Multi-Platform Integration
-- SMS (default messages)
-- Facebook Messenger
-- Instagram DMs
-- TikTok messages
-- Visual indicators for each platform
-- Filter conversations by platform
 
 ### 💬 Core Functionality
 - Conversation list with unread badges
@@ -30,7 +21,7 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 - **New Message Composer** with contact picker
 
 ### 👥 Group Chats
-- Create group conversations
+- Create group conversations (MMS)
 - Add multiple participants
 - Group naming
 - Admin management
@@ -89,7 +80,7 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 - Contact info button
 
 ### 📸 Media Support
-- Image messages
+- Image messages (MMS)
 - Camera integration
 - Photo gallery access
 
@@ -104,12 +95,11 @@ A comprehensive iMessage-style messaging app for Android that unifies multiple m
 - **Notifications**: Enable/disable, sound, vibration, message preview
 - **Privacy**: Read receipts, typing indicators, last seen visibility
 - **Chat**: Enter to send option
-- **Account**: Linked accounts management
 - **Storage**: Cache and media management
 
 ### 🎨 UI Elements
 - Rounded message bubbles with tail effect
-- Platform-specific color coding
+- SMS/MMS indicators
 - Online status dots
 - Unread message counters
 - Smooth transitions between views
@@ -154,22 +144,20 @@ The project includes a GitHub Actions workflow that automatically builds the APK
 
 - READ_SMS / SEND_SMS / RECEIVE_SMS - For SMS messaging
 - READ_CONTACTS - For contact access
-- INTERNET / ACCESS_NETWORK_STATE - For platform APIs
 - CAMERA - For camera integration
-- READ_MEDIA_IMAGES / READ_MEDIA_VIDEO - For media access
+- READ_MEDIA_IMAGES / READ_MEDIA_VIDEO - For media access (MMS)
 - RECORD_AUDIO - For voice messages
 - CALL_PHONE - For voice calls
 - POST_NOTIFICATIONS - For push notifications
 
 ## Future Enhancements
 
-To integrate real APIs, you'll need to:
-1. Set up authentication with Facebook Graph API, Instagram Basic Display API, and TikTok API
-2. Implement WebSocket connections for real-time messaging
-3. Add proper data persistence with SQLite or Room
-4. Handle media uploads and downloads
-5. Implement notification services with Firebase Cloud Messaging
-6. Add end-to-end encryption for secure messaging
+1. Implement WebSocket connections for real-time messaging
+2. Add proper data persistence with SQLite or Room
+3. Handle media uploads and downloads
+4. Implement notification services with Firebase Cloud Messaging
+5. Add end-to-end encryption for secure messaging
+6. RCS messaging support
 
 ## License
 

@@ -13,16 +13,8 @@
     <string name="typing">typing…</string>
     <string name="unread_messages">%d unread</string>
     
-    <!-- Platforms -->
-    <string name="platform_all">All</string>
-    <string name="platform_sms">SMS</string>
-    <string name="platform_facebook">Facebook</string>
-    <string name="platform_instagram">Instagram</string>
-    <string name="platform_tiktok">TikTok</string>
-    <string name="platform_imessage">iMessage</string>
-    
     <!-- Chat -->
-    <string name="message_hint">iMessage</string>
+    <string name="message_hint">Text message</string>
     <string name="send">Send</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
@@ -122,8 +114,6 @@
     <string name="settings_enter_to_send_desc">Use Enter key to send messages</string>
     
     <string name="settings_account">Account</string>
-    <string name="settings_linked_accounts">Linked Accounts</string>
-    <string name="settings_linked_accounts_desc">Manage connected social accounts</string>
     <string name="settings_storage">Storage</string>
     <string name="settings_storage_desc">Manage media and cache</string>
     
